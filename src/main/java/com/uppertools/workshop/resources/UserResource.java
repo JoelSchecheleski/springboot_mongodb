@@ -23,9 +23,10 @@ public class UserResource {
 
 	@Autowired
 	private UserService service;
-	
+
 	/**
 	 * Busca todos os usuários no contexto GET
+	 * 
 	 * @return Retorna um array contendo todos os usuários cadastrados
 	 */
 	@RequestMapping(method = RequestMethod.GET)
@@ -34,20 +35,22 @@ public class UserResource {
 		List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
 		return ResponseEntity.ok(listDto);
 	}
-	
+
 	/**
 	 * Busca um usuário pelo ID
+	 * 
 	 * @param id Código do usuário a ser localizado
 	 * @return Retorna um Usuário caso consiga localizar
 	 */
-	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<UserDTO> getById(@PathVariable String id){
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<UserDTO> getById(@PathVariable String id) {
 		User obj = service.findById(id);
 		return ResponseEntity.ok(new UserDTO(obj));
 	}
-	
+
 	/**
 	 * Cria um novo objeto
+	 * 
 	 * @param obj Objeto recebido na requisição
 	 * @return Retorna o objeto inserido
 	 */
@@ -59,4 +62,15 @@ public class UserResource {
 		return ResponseEntity.created(uri).build();
 	}
 
+	/**
+	 * Deleta um usuário pelo ID
+	 * 
+	 * @param id Código do usuário a deletado
+	 * @return void
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteById(@PathVariable String id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 }

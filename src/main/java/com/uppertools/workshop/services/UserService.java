@@ -19,6 +19,7 @@ public class UserService {
 
 	/**
 	 * Serviço responsável por buscar todos os usuários no banco de dados
+	 * 
 	 * @return Retorna um array contendo todos os usuários cadaastrados
 	 */
 	public List<User> findAll() {
@@ -27,6 +28,7 @@ public class UserService {
 
 	/**
 	 * Busca um usuário por ID
+	 * 
 	 * @param id Código do usuário a ser localizado
 	 * @return Objeto User localizado
 	 */
@@ -34,19 +36,35 @@ public class UserService {
 		Optional<User> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 	}
-	
+
 	/**
 	 * Cria um novo objeto no banco de dados
+	 * 
 	 * @param obj Objeto do tipo usuário
 	 * @return Retorna o objeto usuario inserido
 	 */
 	public User insert(User obj) {
 		return repository.insert(obj);
 	}
-	
-	
-	
+
+	/**
+	 * Elimina um registo com base no ID
+	 * 
+	 * @param id Código do registro a ser deletado
+	 */
+	public void delete(String id) {
+		findById(id);
+		repository.deleteById(id);
+	}
+
+	/**
+	 * Converte objeto vindo da requisição para um para um User
+	 * 
+	 * @param objDto Objeto DTO recebido na requisição
+	 * @return Retorna um User criado
+	 */
 	public User fromDTO(UserDTO objDto) {
 		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
+
 }
