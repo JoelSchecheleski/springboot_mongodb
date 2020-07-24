@@ -6,6 +6,7 @@ import java.util.TimeZone;
 
 import com.uppertools.workshop.domain.Post;
 import com.uppertools.workshop.dto.AuthorDTO;
+import com.uppertools.workshop.dto.CommentsDTO;
 import com.uppertools.workshop.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -39,6 +40,14 @@ public class Instantiation implements CommandLineRunner{
 		this.postRepository.deleteAll();
 		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo, abraços!", new AuthorDTO(u1));
 		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(u2));
+
+		CommentsDTO c1 = new CommentsDTO("Boa viagem mano!", sdf.parse("21/03/2018"), new AuthorDTO(u1));
+		CommentsDTO c2 = new CommentsDTO("Aproveite!", sdf.parse("21/03/2018"), new AuthorDTO(u2));
+		CommentsDTO c3 = new CommentsDTO("Tenha um ótimo dia!", sdf.parse("21/03/2018"), new AuthorDTO(u3));
+
+		post1.getComments().addAll(Arrays.asList(c1, c2));
+		post2.getComments().addAll(Arrays.asList(c3));
+
 		this.postRepository.saveAll(Arrays.asList(post1, post2));
 
 		u1.getPosts().addAll(Arrays.asList(post1, post2));

@@ -1,10 +1,13 @@
 package com.uppertools.workshop.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import com.uppertools.workshop.dto.AuthorDTO;
+import com.uppertools.workshop.dto.CommentsDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,6 +22,7 @@ public class Post implements Serializable {
 	private String body;
 
 	private AuthorDTO author;
+	private List<CommentsDTO> comments = new ArrayList<>();
 
 	public Post() {
 	}
@@ -71,6 +75,14 @@ public class Post implements Serializable {
 		this.author = author;
 	}
 
+	public List<CommentsDTO> getComments() {
+		return this.comments;
+	}
+
+	public void setComments(List<CommentsDTO> comments) {
+		this.comments = comments;
+	}
+
 	@Override public boolean equals(Object o) {
 		if (this == o)
 			return true;
@@ -83,6 +95,5 @@ public class Post implements Serializable {
 	@Override public int hashCode() {
 		return Objects.hash(this.id);
 	}
-
 
 }
