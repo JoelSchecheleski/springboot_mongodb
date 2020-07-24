@@ -38,4 +38,13 @@ public class PostService {
 		return this.repository.findByTitleContainingIgnoreCase(text);
 	}
 
+	/**
+	 * Busca avançada através de um texto contigo no objeto por regex
+	 * @param text Texto usado para localizar um registro
+	 * @return Reetorna uma lista de posts se localizar
+	 */
+	public List<Post> searchTitle(String text) {
+		return this.repository.searchTitle(text);
+	}
+
 }

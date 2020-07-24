@@ -44,4 +44,17 @@ public class PostResource {
 		return ResponseEntity.ok().body(list);
 	}
 
+	/**
+	 * Realiza a busca por um texto contido no objeto por regex
+	 *
+	 * @param text Texto usado como argumento de pesquisa
+	 * @return Retorna um conjunto de posts ou vazio
+	 */
+	@RequestMapping(value = "/searchTitle", method = RequestMethod.GET)
+	public ResponseEntity<List<Post>> searchTitle(@RequestParam(value = "text", defaultValue = "") String text) {
+		text = URL.decodeParam(text);
+		List<Post> list = this.service.findByTitle(text);
+		return ResponseEntity.ok().body(list);
+	}
+
 }
