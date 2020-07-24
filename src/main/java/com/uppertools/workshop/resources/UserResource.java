@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.uppertools.workshop.domain.Post;
 import com.uppertools.workshop.domain.User;
 import com.uppertools.workshop.dto.UserDTO;
 import com.uppertools.workshop.services.UserService;
@@ -84,4 +85,17 @@ public class UserResource {
 		obj = this.service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
+
+	/**
+	 * Busca todos os posts de um usuário
+	 *
+	 * @param id Código do usuário a ser localizado os posts
+	 * @return Retorna array de posts de um usuário
+	 */
+	@RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
+	public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+		User obj = this.service.findById(id);
+		return ResponseEntity.ok().body(obj.getPosts());
+	}
+
 }
