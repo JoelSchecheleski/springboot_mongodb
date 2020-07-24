@@ -29,6 +29,13 @@ public class PostService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 	}
 
-
+	/**
+	 * Busca avançada através de um texto contigo no objeto
+	 * @param text Texto usado para localizar um registro
+	 * @return Reetorna uma lista de posts se localizar
+	 */
+	public List<Post> findByTitle(String text) {
+		return this.repository.findByTitleContainingIgnoreCase(text);
+	}
 
 }

@@ -5,18 +5,17 @@ import java.util.Arrays;
 import java.util.TimeZone;
 
 import com.uppertools.workshop.domain.Post;
+import com.uppertools.workshop.domain.User;
 import com.uppertools.workshop.dto.AuthorDTO;
 import com.uppertools.workshop.dto.CommentsDTO;
 import com.uppertools.workshop.repository.PostRepository;
+import com.uppertools.workshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
-import com.uppertools.workshop.domain.User;
-import com.uppertools.workshop.repository.UserRepository;
-
 @Configuration
-public class Instantiation implements CommandLineRunner{
+public class Instantiation implements CommandLineRunner {
 
 	@Autowired
 	private UserRepository userRepository;
